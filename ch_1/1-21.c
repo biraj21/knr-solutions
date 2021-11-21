@@ -5,28 +5,28 @@
  * suffice to reach a tab stop, which should be given preference?
  *
  * When either a tab or single blank would suffice to reach a tab stop,
- * this program will use a space, not tab.
+ * this program will use a tab (see example 4).
  *
  * Examples:
  * . is used to show a space
  * | is used to show tab stops in output
  * - is used to show show distance (if any) between last char & next tab stop
  *
- * Tab Stop = 3          Tab Stop = 4    Tab Stop = 8
- * In:  a...
- * Out: |a\t|.--|     |a\t|           |a...----|
+ * Tab Stop = 3       Tab Stop = 4    Tab Stop = 8
+ * 1) In:  a...
+ *    Out: |a\t|.--|     |a\t|           |a...----|
  *
- * In:  ...a
- * Out: |\t|a--|      |...a|          |...a----|
+ * 2) In:  ...a
+ *    Out: |\t|a--|      |...a|          |...a----|
  *
- * In:  .....
- * Out: |\t|..-|      |\t|.---|       |.....---|
+ * 3) In:  .....
+ *    Out: |\t|..-|      |\t|.---|       |.....---|
  *
- * In:  ab\tcde
- * Out: |ab\t|cde|    |ab\t|cde-|     |ab\t|cde-----|
+ * 4) In:  ab\tcde
+ *    Out: |ab\t|cde|    |ab\t|cde-|     |ab\t|cde-----|
  *
- * In:  ab.d.\t...
- * Out: |ab.|d\t|\t|  |ab.d|\t|...-|  |ab.d\t|...-----|
+ * 5) In:  ab.d.\t...
+ *    Out: |ab.|d\t|\t|  |ab.d|\t|...-|  |ab.d\t|...-----|
  */
 
 #include <stdio.h>
