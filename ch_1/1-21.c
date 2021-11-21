@@ -3,6 +3,30 @@
  * the minimum number of tabs and blanks to achieve the same spacing. Use
  * the same tab stops as for detab. When either a tab or single blank would
  * suffice to reach a tab stop, which should be given preference?
+ *
+ * When either a tab or single blank would suffice to reach a tab stop,
+ * this program will use a space, not tab.
+ *
+ * Examples:
+ * . is used to show a space
+ * | is used to show tab stops in output
+ * - is used to show show distance (if any) between last char & next tab stop
+ *
+ * Tab Stop = 3          Tab Stop = 4    Tab Stop = 8
+ * In:  a...
+ * Out: |a\t|.--|     |a\t|           |a...----|
+ *
+ * In:  ...a
+ * Out: |\t|a--|      |...a|          |...a----|
+ *
+ * In:  .....
+ * Out: |\t|..-|      |\t|.---|       |.....---|
+ *
+ * In:  ab\tcde
+ * Out: |ab\t|cde|    |ab\t|cde-|     |ab\t|cde-----|
+ *
+ * In:  ab.d.\t...
+ * Out: |ab.|d\t|\t|  |ab.d|\t|...-|  |ab.d\t|...-----|
  */
 
 #include <stdio.h>
@@ -21,16 +45,22 @@ int main(void)
 			putchar('\n');
 			i = 0;
 		} else if (c == ' ') {
-			int spaces = 1; // number of spaces after within current tab stop
+			int spaces = 1; // number of spaces within current tab stop
 			while  ((i + spaces) < TABSTOP && (c = getchar()) == ' ')  {
 				++spaces;
 			}
 
-			if ((spaces > 1 && i + spaces == TABSTOP) || c == '\t') {
-				putchar('#');
+			if (c == '\t') {
+				putchar('\t');
+			} else if (i + spaces == TABSTOP) {
+				if (spaces > 1) {
+					putchar('\t');
+				} else {
+					putchar(' ');
+				}
 			} else {
 				while (spaces > 0) {
-					putchar('.');
+					putchar(' ');
 					--spaces;
 				}
 

@@ -21,8 +21,9 @@ int main(void)
 			putchar('\n');
 			i = 0;
 		} else if (c == '\t') {
-			for (int j = i; j < TABSTOP; ++j) {
-				putchar('.');
+			while (i < TABSTOP) {
+				putchar(' ');
+				++i;
 			}
 
 			i = 0;
